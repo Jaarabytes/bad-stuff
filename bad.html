@@ -1,0 +1,26 @@
+<script>
+
+    // ENJOY :)
+    function playBeep() {
+      const ctx = new AudioContext();
+      const oscillator = ctx.createOscillator();
+      oscillator.type = "square";
+      oscillator.frequency.setValueAtTime(Math.random() * 2000 + 200, ctx.currentTime);
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.5, ctx.currentTime);
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
+      oscillator.start();
+      setTimeout(() => oscillator.stop(), 100);
+    }
+
+
+    setInterval(() => {
+      playBeep();
+      if (Math.random() < 0.3) {
+        alert("WHY ARE YOU STILL HERE?");
+      }
+    }, 500);
+
+    window.onbeforeunload = () => "Nope. Suffer.";
+</script>
